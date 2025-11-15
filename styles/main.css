@@ -548,6 +548,69 @@ a:hover {
   margin-bottom: var(--spacing-md);
 }
 
+.announcement-author,
+.announcement-date,
+.announcement-location,
+.announcement-views {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.announcement-author i,
+.announcement-date i,
+.announcement-location i,
+.announcement-views i {
+  color: var(--primary-color);
+  width: 16px;
+  text-align: center;
+}
+
+.announcement-category {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.announcement-category.lecture {
+  background-color: #3498db;
+}
+
+.announcement-category.seminar {
+  background-color: #9b59b6;
+}
+
+.announcement-category.workshop {
+  background-color: #e67e22;
+}
+
+.announcement-category.conference {
+  background-color: #2ecc71;
+}
+
+.announcement-category.internship {
+  background-color: #f39c12;
+}
+
+.announcement-category.research {
+  background-color: #34495e;
+}
+
+.urgent-badge {
+  background-color: var(--warning-color);
+  color: var(--text-light);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .category {
   background-color: var(--primary-color);
   color: var(--text-light);

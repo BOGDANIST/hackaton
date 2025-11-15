@@ -18,8 +18,11 @@
                 <a href="index.html" class="nav-link active">Головна</a>
                 <a href="announcements.html" class="nav-link">Оголошення</a>
                 <a href="profile.html" class="nav-link">Профіль</a>
-                <a href="login.html" class="nav-link">Вхід</a>
-                <a href="register.html" class="nav-link">Реєстрація</a>
+                <a href="login.html" class="nav-link" id="loginLink">Вхід</a>
+                <a href="register.html" class="nav-link" id="registerLink">Реєстрація</a>
+                <button class="nav-link" id="logoutBtn" style="display: none; background: none; border: none; color: inherit; cursor: pointer;">
+                    <i class="fas fa-sign-out-alt"></i> Вихід
+                </button>
                 <button class="theme-toggle" id="themeToggle">
                     <i class="fas fa-moon"></i>
                 </button>
@@ -116,5 +119,91 @@
 
     <script src="scripts/main.js"></script>
     <script src="scripts/auth.js"></script>
+    <script>
+        // Initialize main page functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update navigation based on authentication status
+            NavigationManager.updateNavigation();
+            
+            // Load and display statistics
+            const stats = dataManager.getStatistics();
+            
+            // Update statistics display
+            const totalAnnouncementsEl = document.getElementById('totalAnnouncements');
+            const totalUniversitiesEl = document.getElementById('totalUniversities');
+            const totalCompaniesEl = document.getElementById('totalCompanies');
+            
+            if (totalAnnouncementsEl) totalAnnouncementsEl.textContent = stats.activeAnnouncements;
+            if (totalUniversitiesEl) totalUniversitiesEl.textContent = stats.totalUniversities;
+            if (totalCompaniesEl) totalCompaniesEl.textContent = stats.totalCompanies;
+            
+            // Load recent announcements
+            loadRecentAnnouncements();
+        });
+        
+        function loadRecentAnnouncements() {
+            const announcements = dataManager.getActiveAnnouncements();
+            const recentAnnouncements = announcements
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .slice(0, 6); // Show only 6 most recent
+            
+            const grid = document.getElementById('announcementsGrid');
+            const noAnnouncements = document.getElementById('noAnnouncements');
+            
+            if (recentAnnouncements.length === 0) {
+                if (grid) grid.style.display = 'none';
+                if (noAnnouncements) noAnnouncements.style.display = 'block';
+                return;
+            }
+            
+            if (grid) {
+                grid.style.display = 'grid';
+                grid.innerHTML = recentAnnouncements.map(announcement => createAnnouncementCard(announcement)).join('');
+            }
+            if (noAnnouncements) noAnnouncements.style.display = 'none';
+        }
+        
+        function createAnnouncementCard(announcement) {
+            const author = authManager.getUserById(announcement.authorId);
+            const authorName = author ? (author.universityName || author.companyName || 'Невідомий автор') : 'Невідомий автор';
+            
+            return `
+                <div class="announcement-card">
+                    <div class="announcement-header">
+                        <div class="announcement-category ${announcement.category}">
+                            ${Utils.getCategoryDisplayName(announcement.category)}
+                        </div>
+                        ${announcement.urgent ? '<div class="urgent-badge">Терміново</div>' : ''}
+                    </div>
+                    <h3 class="announcement-title">
+                        <a href="view-announcement.html?id=${announcement.id}">${Utils.sanitizeHtml(announcement.title)}</a>
+                    </h3>
+                    <p class="announcement-description">
+                        ${Utils.truncateText(Utils.sanitizeHtml(announcement.description), 120)}
+                    </p>
+                    <div class="announcement-meta">
+                        <div class="announcement-author">
+                            <i class="fas fa-${announcement.organizationType === 'university' ? 'university' : 'building'}"></i>
+                            ${Utils.sanitizeHtml(authorName)}
+                        </div>
+                        <div class="announcement-date">
+                            <i class="fas fa-calendar"></i>
+                            ${Utils.formatDate(announcement.createdAt)}
+                        </div>
+                    </div>
+                    <div class="announcement-footer">
+                        <div class="announcement-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            ${Utils.getFormatDisplayName(announcement.format)}
+                        </div>
+                        <div class="announcement-views">
+                            <i class="fas fa-eye"></i>
+                            ${announcement.viewCount || 0}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    </script>
 </body>
 </html>
