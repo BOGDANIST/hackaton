@@ -247,6 +247,7 @@ a:hover {
 }
 
 .btn-primary {
+  margin-bottom: 5px;
   background: var(--gradient-primary);
   color: var(--text-light);
   box-shadow: 0 2px 8px var(--shadow-light);
@@ -904,7 +905,7 @@ a:hover {
 .form-icon {
   position: absolute;
   left: var(--spacing-md);
-  top: 50%;
+  top: 68%;
   transform: translateY(-50%);
   color: var(--text-secondary);
   pointer-events: none;
@@ -918,7 +919,7 @@ a:hover {
 .password-toggle {
   position: absolute;
   right: var(--spacing-md);
-  top: 50%;
+  top: 68%;
   transform: translateY(-50%);
   background: none;
   border: none;
