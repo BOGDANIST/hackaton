@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профіль - UniConnect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1><a href="index.html">UniConnect</a></h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Головна</a>
+                <a href="announcements.html" class="nav-link">Оголошення</a>
+                <a href="profile.html" class="nav-link active">Профіль</a>
+                <button class="nav-link logout-btn" id="logoutBtn">Вихід</button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="profile-container">
+                <div class="profile-sidebar">
+                    <div class="profile-card">
+                        <div class="profile-avatar">
+                            <i class="fas fa-university" id="profileIcon"></i>
+                        </div>
+                        <h2 id="profileName">Назва організації</h2>
+                        <p class="profile-type" id="profileType">Тип організації</p>
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <span class="stat-number" id="totalAnnouncements">0</span>
+                                <span class="stat-label">Оголошень</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number" id="activeAnnouncements">0</span>
+                                <span class="stat-label">Активних</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-menu">
+                        <button class="menu-item active" data-tab="info">
+                            <i class="fas fa-info-circle"></i>
+                            Інформація
+                        </button>
+                        <button class="menu-item" data-tab="announcements">
+                            <i class="fas fa-bullhorn"></i>
+                            Мої оголошення
+                        </button>
+                        <button class="menu-item" data-tab="settings">
+                            <i class="fas fa-cog"></i>
+                            Налаштування
+                        </button>
+                    </div>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Вкладка інформації -->
+                    <div class="tab-content active" id="infoTab">
+                        <div class="content-header">
+                            <h3>Інформація про організацію</h3>
+                            <button class="btn btn-outline" id="editInfoBtn">
+                                <i class="fas fa-edit"></i> Редагувати
+                            </button>
+                        </div>
+
+                        <div class="info-display" id="infoDisplay">
+                            <div class="info-section">
+                                <h4>Основна інформація</h4>
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <label>Назва:</label>
+                                        <span id="displayName">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Email:</label>
+                                        <span id="displayEmail">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Телефон:</label>
+                                        <span id="displayPhone">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Адреса:</label>
+                                        <span id="displayAddress">-</span>
+                                    </div>
+                                    <div class="info-item">
+                                        <label>Веб-сайт:</label>
+                                        <span id="displayWebsite">-</span>
+                                    </div>
+                                    <div class="info-item" id="industryItem" style="display: none;">
+                                        <label>Галузь:</label>
+                                        <span id="displayIndustry">-</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="info-section">
+                                <h4>Опис</h4>
+                                <p id="displayDescription">Опис не вказано</p>
+                            </div>
+
+                            <div class="info-section">
+                                <h4>Контактна особа</h4>
+                                <p id="displayContactPerson">-</p>
+                            </div>
+                        </div>
+
+                        <form class="info-form" id="infoForm" style="display: none;">
+                            <div class="form-section">
+                                <h4>Основна інформація</h4>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="editName">Назва:</label>
+                                        <input type="text" id="editName" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editEmail">Email:</label>
+                                        <input type="email" id="editEmail" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="editPhone">Телефон:</label>
+                                        <input type="tel" id="editPhone">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="editWebsite">Веб-сайт:</label>
+                                        <input type="url" id="editWebsite">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="editAddress">Адреса:</label>
+                                    <input type="text" id="editAddress">
+                                </div>
+                                <div class="form-group" id="editIndustryGroup" style="display: none;">
+                                    <label for="editIndustry">Галузь:</label>
+                                    <select id="editIndustry">
+                                        <option value="it">Інформаційні технології</option>
+                                        <option value="finance">Фінанси та банківська справа</option>
+                                        <option value="healthcare">Охорона здоров'я</option>
+                                        <option value="education">Освіта</option>
+                                        <option value="manufacturing">Виробництво</option>
+                                        <option value="retail">Роздрібна торгівля</option>
+                                        <option value="consulting">Консалтинг</option>
+                                        <option value="marketing">Маркетинг та реклама</option>
+                                        <option value="other">Інше</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h4>Опис</h4>
+                                <div class="form-group">
+                                    <textarea id="editDescription" rows="4" maxlength="1000"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h4>Контактна особа</h4>
+                                <div class="form-group">
+                                    <input type="text" id="editContactPerson" placeholder="Ім'я контактної особи">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-secondary" id="cancelEditBtn">Скасувати</button>
+                                <button type="submit" class="btn btn-primary">Зберегти зміни</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Вкладка оголошень -->
+                    <div class="tab-content" id="announcementsTab">
+                        <div class="content-header">
+                            <h3>Мої оголошення</h3>
+                            <a href="create-announcement.html" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Створити оголошення
+                            </a>
+                        </div>
+
+                        <div class="announcements-filter">
+                            <select id="myAnnouncementsFilter">
+                                <option value="all">Всі оголошення</option>
+                                <option value="active">Активні</option>
+                                <option value="expired">Завершені</option>
+                                <option value="draft">Чернетки</option>
+                            </select>
+                        </div>
+
+                        <div class="my-announcements" id="myAnnouncements">
+                            <!-- Оголошення користувача -->
+                        </div>
+
+                        <div class="no-announcements" id="noMyAnnouncements" style="display: none;">
+                            <i class="fas fa-bullhorn"></i>
+                            <h4>У вас поки немає оголошень</h4>
+                            <p>Створіть своє перше оголошення для пошуку партнерів</p>
+                            <a href="create-announcement.html" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Створити оголошення
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Вкладка налаштувань -->
+                    <div class="tab-content" id="settingsTab">
+                        <div class="content-header">
+                            <h3>Налаштування акаунту</h3>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Сповіщення</h4>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="emailNotifications" checked>
+                                    <span class="checkmark"></span>
+                                    Отримувати сповіщення на email
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="newAnnouncementNotifications" checked>
+                                    <span class="checkmark"></span>
+                                    Сповіщення про нові оголошення
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Конфіденційність</h4>
+                            <div class="setting-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="showContactInfo" checked>
+                                    <span class="checkmark"></span>
+                                    Показувати контактну інформацію в профілі
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-section">
+                            <h4>Зміна пароля</h4>
+                            <form id="changePasswordForm">
+                                <div class="form-group">
+                                    <label for="currentPassword">Поточний пароль:</label>
+                                    <input type="password" id="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">Новий пароль:</label>
+                                    <input type="password" id="newPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmNewPassword">Підтвердіть новий пароль:</label>
+                                    <input type="password" id="confirmNewPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Змінити пароль</button>
+                            </form>
+                        </div>
+
+                        <div class="settings-section danger-zone">
+                            <h4>Небезпечна зона</h4>
+                            <p>Ці дії незворотні. Будьте обережні.</p>
+                            <button class="btn btn-danger" id="deleteAccountBtn">
+                                <i class="fas fa-trash"></i> Видалити акаунт
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 UniConnect. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/profile.js"></script>
+</body>
+</html>

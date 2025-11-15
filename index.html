@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Університетська платформа оголошень</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1>UniConnect</h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Головна</a>
+                <a href="announcements.html" class="nav-link">Оголошення</a>
+                <a href="profile.html" class="nav-link">Профіль</a>
+                <a href="login.html" class="nav-link">Вхід</a>
+                <a href="register.html" class="nav-link">Реєстрація</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="hero">
+                <h2>Платформа для співпраці університетів та компаній</h2>
+                <p>Знаходьте можливості для проведення лекцій, семінарів та інших освітніх заходів</p>
+                <div class="hero-buttons">
+                    <a href="register.html" class="btn btn-primary">Приєднатися</a>
+                    <a href="announcements.html" class="btn btn-secondary">Переглянути оголошення</a>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <aside class="sidebar">
+                    <div class="sidebar-section">
+                        <h3>Фільтри</h3>
+                        <div class="filter-group">
+                            <label>Тип організації:</label>
+                            <select id="organizationFilter">
+                                <option value="">Всі</option>
+                                <option value="university">Університети</option>
+                                <option value="company">Компанії</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Категорія:</label>
+                            <select id="categoryFilter">
+                                <option value="">Всі категорії</option>
+                                <option value="lecture">Лекції</option>
+                                <option value="seminar">Семінари</option>
+                                <option value="workshop">Майстер-класи</option>
+                                <option value="conference">Конференції</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label>Пошук:</label>
+                            <input type="text" id="searchFilter" placeholder="Введіть ключові слова...">
+                        </div>
+                        <button class="btn btn-primary" id="applyFilters">Застосувати фільтри</button>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h3>Статистика</h3>
+                        <div class="stats">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalAnnouncements">0</span>
+                                <span class="stat-label">Оголошень</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalUniversities">0</span>
+                                <span class="stat-label">Університетів</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalCompanies">0</span>
+                                <span class="stat-label">Компаній</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <section class="main-content">
+                    <div class="section-header">
+                        <h2>Останні оголошення</h2>
+                        <a href="create-announcement.html" class="btn btn-primary" id="createAnnouncementBtn" style="display: none;">
+                            <i class="fas fa-plus"></i> Створити оголошення
+                        </a>
+                    </div>
+                    
+                    <div class="announcements-grid" id="announcementsGrid">
+                        <!-- Оголошення будуть завантажені через JavaScript -->
+                    </div>
+
+                    <div class="no-announcements" id="noAnnouncements" style="display: none;">
+                        <i class="fas fa-bullhorn"></i>
+                        <h3>Поки що немає оголошень</h3>
+                        <p>Станьте першим, хто створить оголошення на платформі!</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 UniConnect. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+</body>
+</html>

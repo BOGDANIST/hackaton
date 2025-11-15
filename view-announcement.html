@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перегляд оголошення - UniConnect</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1><a href="index.html">UniConnect</a></h1>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Головна</a>
+                <a href="announcements.html" class="nav-link">Оголошення</a>
+                <a href="profile.html" class="nav-link">Профіль</a>
+                <a href="login.html" class="nav-link" id="loginLink">Вхід</a>
+                <a href="register.html" class="nav-link" id="registerLink">Реєстрація</a>
+                <button class="nav-link logout-btn" id="logoutBtn" style="display: none;">Вихід</button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="announcement-view">
+                <div class="announcement-header">
+                    <a href="announcements.html" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Назад до оголошень
+                    </a>
+                    <div class="announcement-actions" id="announcementActions" style="display: none;">
+                        <button class="btn btn-outline" id="editAnnouncementBtn">
+                            <i class="fas fa-edit"></i> Редагувати
+                        </button>
+                        <button class="btn btn-danger" id="deleteAnnouncementBtn">
+                            <i class="fas fa-trash"></i> Видалити
+                        </button>
+                    </div>
+                </div>
+
+                <div class="announcement-content">
+                    <div class="announcement-main">
+                        <div class="announcement-title-section">
+                            <h1 id="announcementTitle">Заголовок оголошення</h1>
+                            <div class="announcement-meta">
+                                <span class="category" id="announcementCategory">Категорія</span>
+                                <span class="date" id="announcementDate">Дата публікації</span>
+                                <span class="urgent" id="urgentBadge" style="display: none;">
+                                    <i class="fas fa-exclamation-triangle"></i> Терміново
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="announcement-description">
+                            <h3>Опис</h3>
+                            <div id="announcementDescription">
+                                Опис оголошення буде завантажено...
+                            </div>
+                        </div>
+
+                        <div class="announcement-details">
+                            <h3>Деталі заходу</h3>
+                            <div class="details-grid">
+                                <div class="detail-item" id="eventDateItem" style="display: none;">
+                                    <i class="fas fa-calendar"></i>
+                                    <div>
+                                        <label>Дата проведення:</label>
+                                        <span id="eventDate">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item" id="eventTimeItem" style="display: none;">
+                                    <i class="fas fa-clock"></i>
+                                    <div>
+                                        <label>Час проведення:</label>
+                                        <span id="eventTime">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item" id="durationItem" style="display: none;">
+                                    <i class="fas fa-hourglass-half"></i>
+                                    <div>
+                                        <label>Тривалість:</label>
+                                        <span id="duration">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item" id="locationItem" style="display: none;">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <div>
+                                        <label>Місце проведення:</label>
+                                        <span id="location">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item" id="formatItem" style="display: none;">
+                                    <i class="fas fa-desktop"></i>
+                                    <div>
+                                        <label>Формат:</label>
+                                        <span id="format">-</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item" id="targetAudienceItem" style="display: none;">
+                                    <i class="fas fa-users"></i>
+                                    <div>
+                                        <label>Цільова аудиторія:</label>
+                                        <span id="targetAudience">-</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="announcement-requirements" id="requirementsSection" style="display: none;">
+                            <h3>Вимоги та умови</h3>
+                            <div class="requirements-content">
+                                <div class="requirement-item" id="requirementsItem" style="display: none;">
+                                    <h4>Вимоги до партнера:</h4>
+                                    <p id="requirements">-</p>
+                                </div>
+                                <div class="requirement-item" id="compensationItem" style="display: none;">
+                                    <h4>Винагорода/Компенсація:</h4>
+                                    <p id="compensation">-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="announcement-additional" id="additionalSection" style="display: none;">
+                            <h3>Додаткова інформація</h3>
+                            <p id="additionalInfo">-</p>
+                        </div>
+                    </div>
+
+                    <div class="announcement-sidebar">
+                        <div class="organization-card">
+                            <div class="org-header">
+                                <div class="org-avatar">
+                                    <i class="fas fa-university" id="orgIcon"></i>
+                                </div>
+                                <div class="org-info">
+                                    <h3 id="orgName">Назва організації</h3>
+                                    <p class="org-type" id="orgType">Тип організації</p>
+                                </div>
+                            </div>
+                            <div class="org-description" id="orgDescription">
+                                Опис організації...
+                            </div>
+                            <div class="org-contact">
+                                <h4>Контактна інформація</h4>
+                                <div class="contact-item" id="contactEmailItem" style="display: none;">
+                                    <i class="fas fa-envelope"></i>
+                                    <a href="#" id="contactEmail">email@example.com</a>
+                                </div>
+                                <div class="contact-item" id="contactPhoneItem" style="display: none;">
+                                    <i class="fas fa-phone"></i>
+                                    <span id="contactPhone">+380123456789</span>
+                                </div>
+                                <div class="contact-item" id="contactWebsiteItem" style="display: none;">
+                                    <i class="fas fa-globe"></i>
+                                    <a href="#" target="_blank" id="contactWebsite">website.com</a>
+                                </div>
+                                <div class="contact-item" id="contactPersonItem" style="display: none;">
+                                    <i class="fas fa-user"></i>
+                                    <span id="contactPerson">Контактна особа</span>
+                                </div>
+                            </div>
+                            <div class="org-actions">
+                                <button class="btn btn-primary btn-full" id="contactBtn">
+                                    <i class="fas fa-envelope"></i> Зв'язатися
+                                </button>
+                                <button class="btn btn-outline btn-full" id="viewProfileBtn">
+                                    <i class="fas fa-user"></i> Переглянути профіль
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="announcement-stats">
+                            <h4>Статистика</h4>
+                            <div class="stat-item">
+                                <i class="fas fa-eye"></i>
+                                <span>Переглядів: <span id="viewCount">0</span></span>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-calendar-plus"></i>
+                                <span>Опубліковано: <span id="publishDate">-</span></span>
+                            </div>
+                            <div class="stat-item" id="expiryItem" style="display: none;">
+                                <i class="fas fa-calendar-times"></i>
+                                <span>Актуально до: <span id="expiryDate">-</span></span>
+                            </div>
+                        </div>
+
+                        <div class="related-announcements">
+                            <h4>Схожі оголошення</h4>
+                            <div id="relatedAnnouncements">
+                                <!-- Схожі оголошення будуть завантажені через JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальне вікно контакту -->
+    <div class="modal" id="contactModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Зв'язатися з організацією</h3>
+                <button class="modal-close" id="closeContactModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="senderName">Ваше ім'я:</label>
+                        <input type="text" id="senderName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senderEmail">Ваш email:</label>
+                        <input type="email" id="senderEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="senderPhone">Ваш телефон (опціонально):</label>
+                        <input type="tel" id="senderPhone">
+                    </div>
+                    <div class="form-group">
+                        <label for="messageSubject">Тема повідомлення:</label>
+                        <input type="text" id="messageSubject" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="messageText">Повідомлення:</label>
+                        <textarea id="messageText" rows="5" required 
+                                  placeholder="Опишіть ваш інтерес до оголошення..."></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary" id="cancelContactBtn">Скасувати</button>
+                        <button type="submit" class="btn btn-primary">Надіслати повідомлення</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 UniConnect. Всі права захищені.</p>
+        </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/view-announcement.js"></script>
+</body>
+</html>
